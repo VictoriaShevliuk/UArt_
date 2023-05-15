@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>All Pieces of the Exhibition</title>
+</head>
+<body>
+<div th:replace="header"></div>
+<div class="col-md-offset-2 col-sm-8">
+    <h2 th:text="${'All Pieces From ' + exhibition.title}"></h2>
+
+    <form class="form-horizontal" th:action="@{|/pieces/create/exhibitions/${exhibition.id}|}" method="get">
+        <div align="right">
+            <input class="btn-info btn-lg" type="submit" value="Create Piece">
+        </div>
+    </form>
+
+
+    <br>
+    <h3>Pieces:</h3>
+    <table class="table">
+        <tr>
+            <th>No.</th>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Genre</th>
+            <th>Description</th>
+            <th colspan="2">Operations</th>
+        </tr>
+        <tr th:each="piece, iStat: ${pieces}">
+            <td th:text="${iStat.index + 1}"/>
+            <td th:text="${piece.id}"/>
+            <td th:text="${piece.name}"/>
+            <td th:text="${piece.genre.name().substring(0, 1) + piece.genre.name().substring(1).toLowerCase()}"/>
+            <td th:text="${piece.description.name}"/>
+            <td>
+                <a th:href="@{|/pieces/${piece.id}/update/exhibitions/${exhibition.id}|}">Edit</a>
+            </td>
+            <td>
+                <a th:href="@{|/pieces/${piece.id}/delete/exhibitions/${exhibition.id}|}">Remove</a>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <h3>Collaborators:</h3>
+    <span th:if="${exhibition.getOwner().getEmail() == #authentication.name || #authentication.principal.role == 'ADMIN' }">
+        <form class="form-horizontal" th:action="@{/exhibitions/{id}/add(id = ${exhibition.id})}" method="get">
+            <select class="form-control" name="user_id" id="users">
+                <option>Select collaborator...</option>
+                <option th:each="user : ${users}" th:value="${user.id}"
+                        th:text="${user.firstName + ' ' + user.lastName}"></option>
+            </select>
+            <input align="right" class="btn btn" type="submit" value="Add">
+        </form>
+    </span>
+    <br>
+    <table class="table">
+        <tr th:each="collaborator, iStat: ${exhibition.collaborators}">
+            <td th:text="${iStat.index + 1}"/>
+            <td>
+                <a th:href="@{|/exhibitions/all/users/${collaborator.id}|}"
+                   th:text="${collaborator.firstName + ' ' + collaborator.lastName}"/>
+            </td>
+            <td>
+                <a th:href="@{/exhibitions/{id}/remove(id = ${exhibition.id}, user_id = ${collaborator.id})}">Remove</a>
+            </td>
+        </tr>
+    </table>
+
+    <span>
+        <a th:href="@{|/exhibitions/all/users/${exhibition.owner.id}|}">Go to Exhibitions</a>
+    </span>
+</div>
+</body>
+</html>
