@@ -18,6 +18,7 @@
             <small class="form-text text-muted" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>
         </div>
     </div>
+
     <div class="form-group">
         <label class="col-sm-2 control-label" for="genre">Genre:</label>
         <div class="col-sm-6">
@@ -27,6 +28,16 @@
             </select>
         </div>
     </div>
+
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="name">Select an image to upload:</label>
+        <div class="col-sm-6">
+            <input type="file" id="imageUpload" name="imageUpload" accept="image/*">
+            <input type="submit" value="Upload">
+        </div>
+    </div>
+
     <div class="col-sm-offset-2 col-sm-6">
         <input class="btn btn-info" type="submit" value="Create"/>
         <input class="btn btn" type="reset" value="Clear"/>

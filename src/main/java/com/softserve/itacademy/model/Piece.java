@@ -16,17 +16,17 @@ public class Piece {
     @Enumerated(EnumType.STRING)
     private Genre genre;
 
-    @Column(name = "type")
+    /*@Column(name = "type")
     @Enumerated(EnumType.STRING)
-    private Type type;
+    private Type type;*/
 
     @ManyToOne
     @JoinColumn(name = "exhibition_id")
     private Exhibition exhibition;
 
-    @ManyToOne
+   /* @ManyToOne
     @JoinColumn(name = "description_id")
-    private Description description;
+    private Description description;*/
 
     public Piece() {
     }
@@ -55,8 +55,8 @@ public class Piece {
         this.genre = genre;
     }
 
-    public Type getType(){return type;}
-    public void setType(Type type){this.type = type;}
+   /* public Type getType(){return type;}
+    public void setType(Type type){this.type = type;}*/
 
     public Exhibition getExhibition() {
         return exhibition;
@@ -66,13 +66,13 @@ public class Piece {
         this.exhibition = exhibition;
     }
 
-    public Description getDescription() {
+   /* public Description getDescription() {
         return description;
     }
 
     public void setDescription(Description description) {
         this.description = description;
-    }
+    }*/
 
     @Override
     public String toString() {
@@ -80,9 +80,9 @@ public class Piece {
                 "id = " + id +
                 ", name = '" + name + '\'' +
                 ", genre = " + genre +
-                ", type = " + type +
+                //", type = " + type +
                 ", exhibition = " + exhibition +
-                ", description = " + description +
+               // ", description = " + description +
                 "} ";
     }
 

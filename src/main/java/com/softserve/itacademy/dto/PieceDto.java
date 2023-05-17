@@ -15,18 +15,18 @@ public class PieceDto {
     @NotNull
     private long exhibitionId;
 
-    @NotNull
-    private long typeId;
+    /*@NotNull
+    private long typeId;*/
 
     public PieceDto() {
     }
 
-    public PieceDto(long id, String name, String genre, long exhibitionId, long typeId) {
+    public PieceDto(long id, String name, String genre, long exhibitionId) {
         this.id = id;
         this.name = name;
         this.genre = genre;
         this.exhibitionId = exhibitionId;
-        this.typeId = typeId;
+
     }
 
     public long getId() {
@@ -61,11 +61,11 @@ public class PieceDto {
         this.exhibitionId = exhibitionId;
     }
 
-    public long getTypeId() {
+   /* public long getTypeId() {
         return typeId;
-    }
+    }*/
 
-    public void setTypeId(long typeId) {
+  /*  public void setTypeId(long typeId) {
         this.typeId = typeId;
-    }
+    }*/
 }

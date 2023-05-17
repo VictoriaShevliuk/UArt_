@@ -8,7 +8,7 @@
 <body>
 <div th:replace="header"></div>
 <div class="col-md-offset-2 col-sm-8">
-    <h2 th:text="${'All Pieces From ' + exhibition.title}"></h2>
+    <h2 th:text="${'All Pieces Of ' + exhibition.title}"></h2>
 
     <form class="form-horizontal" th:action="@{|/pieces/create/exhibitions/${exhibition.id}|}" method="get">
         <div align="right">
@@ -25,7 +25,6 @@
             <th>Id</th>
             <th>Name</th>
             <th>Genre</th>
-            <th>Description</th>
             <th colspan="2">Operations</th>
         </tr>
         <tr th:each="piece, iStat: ${pieces}">
@@ -33,7 +32,6 @@
             <td th:text="${piece.id}"/>
             <td th:text="${piece.name}"/>
             <td th:text="${piece.genre.name().substring(0, 1) + piece.genre.name().substring(1).toLowerCase()}"/>
-            <td th:text="${piece.description.name}"/>
             <td>
                 <a th:href="@{|/pieces/${piece.id}/update/exhibitions/${exhibition.id}|}">Edit</a>
             </td>
