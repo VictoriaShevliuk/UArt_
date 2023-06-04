@@ -1,4 +1,4 @@
-package com.softserve.itacademy.service.impl;
+/*package com.softserve.itacademy.service.impl;
 
 import com.softserve.itacademy.model.ImageData;
 import com.softserve.itacademy.repository.ImageRepository;
@@ -37,3 +37,4 @@ public class ImageService {
 
 
 }
+*/

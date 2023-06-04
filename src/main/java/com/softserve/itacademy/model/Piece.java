@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name = "pieces")
 public class Piece {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @Column(name = "name", nullable = false)
@@ -16,9 +16,11 @@ public class Piece {
     @Enumerated(EnumType.STRING)
     private Genre genre;
 
-    /*@Column(name = "type")
-    @Enumerated(EnumType.STRING)
-    private Type type;*/
+
+
+    @Column(name = "image_url", nullable = true)
+    private String imageUrl;
+
 
     @ManyToOne
     @JoinColumn(name = "exhibition_id")
@@ -37,6 +39,13 @@ public class Piece {
 
     public void setId(long id) {
         this.id = id;
+    }
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getName() {
@@ -80,7 +89,7 @@ public class Piece {
                 "id = " + id +
                 ", name = '" + name + '\'' +
                 ", genre = " + genre +
-                //", type = " + type +
+                ", imageUrl = " + imageUrl +
                 ", exhibition = " + exhibition +
                // ", description = " + description +
                 "} ";

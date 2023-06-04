@@ -10,6 +10,7 @@ public class PieceTransformer {
                 piece.getId(),
                 piece.getName(),
                 piece.getGenre().toString(),
+                piece.getImageUrl(),
                 piece.getExhibition().getId()
         );
     }
@@ -19,6 +20,7 @@ public class PieceTransformer {
         piece.setId(pieceDto.getId());
         piece.setName(pieceDto.getName());
         piece.setGenre(Genre.valueOf(pieceDto.getGenre()));
+        piece.setImageUrl(pieceDto.getImageUrl());
         piece.setExhibition(exhibition);
         return piece;
     }

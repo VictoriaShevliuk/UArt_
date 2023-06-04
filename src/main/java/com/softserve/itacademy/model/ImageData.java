@@ -1,4 +1,4 @@
-package com.softserve.itacademy.model;
+/*package com.softserve.itacademy.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,3 +24,4 @@ public class ImageData {
     private byte[] imageData;
 
 }
+*/

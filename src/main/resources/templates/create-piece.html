@@ -31,10 +31,10 @@
 
 
     <div class="form-group">
-        <label class="col-sm-2 control-label" for="name">Select an image to upload:</label>
+        <label class="col-sm-2 control-label" for="name">Image URL:</label>
         <div class="col-sm-6">
-            <input type="file" id="imageUpload" name="imageUpload" accept="image/*">
-            <input type="submit" value="Upload">
+            <input class="form-control" type="text" th:field="*{imageUrl}" id="imageUrl"/>
+            <small class="form-text text-muted" th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}"></small>
         </div>
     </div>
 

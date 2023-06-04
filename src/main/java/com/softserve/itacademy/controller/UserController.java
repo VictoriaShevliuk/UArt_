@@ -33,7 +33,7 @@ public class UserController {
             return "create-user";
         }
         user.setPassword(user.getPassword());
-        user.setRole(roleService.readById(2));
+        user.setRole(roleService.readById(1));
         User newUser = userService.create(user);
         return "redirect:/exhibitions/all/users/" + newUser.getId();
     }

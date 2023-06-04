@@ -1,4 +1,4 @@
-package com.softserve.itacademy.controller;
+/*package com.softserve.itacademy.controller;
 
 import com.softserve.itacademy.service.impl.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,4 +36,4 @@ public class ImageController {
     }
 
 
-}
+}*/

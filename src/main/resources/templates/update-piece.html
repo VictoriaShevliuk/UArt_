@@ -33,6 +33,12 @@
             </select>
         </div>
 
+        <div class="form-group">
+            <label class="control-label" for="name">Image URL:</label>
+            <input class="form-control" type="text" th:field="*{imageUrl}" th:value="*{imageUrl}" id="imageUrl"/>
+            <small class="form-text text-muted" th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}"></small>
+        </div>
+
         <input class="btn btn-info" type="submit" value="Update"/>
         <input class="btn btn" type="reset" value="Clear"/>
 

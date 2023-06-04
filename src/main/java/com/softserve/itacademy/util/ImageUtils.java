@@ -1,4 +1,4 @@
-package com.softserve.itacademy.util;
+/*package com.softserve.itacademy.util;
 
 import java.io.ByteArrayOutputStream;
 import java.util.zip.Deflater;
@@ -42,3 +42,4 @@ public class ImageUtils {
     }
 
 }
+*/

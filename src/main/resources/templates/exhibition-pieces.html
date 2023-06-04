@@ -25,6 +25,7 @@
             <th>Id</th>
             <th>Name</th>
             <th>Genre</th>
+            <th>Piece</th>
             <th colspan="2">Operations</th>
         </tr>
         <tr th:each="piece, iStat: ${pieces}">
@@ -32,6 +33,7 @@
             <td th:text="${piece.id}"/>
             <td th:text="${piece.name}"/>
             <td th:text="${piece.genre.name().substring(0, 1) + piece.genre.name().substring(1).toLowerCase()}"/>
+            <td> <img th:src="${piece.imageUrl}"></td>
             <td>
                 <a th:href="@{|/pieces/${piece.id}/update/exhibitions/${exhibition.id}|}">Edit</a>
             </td>

@@ -13,6 +13,8 @@ public class PieceDto {
     private String genre;
 
     @NotNull
+    private String imageUrl;
+    @NotNull
     private long exhibitionId;
 
     /*@NotNull
@@ -21,10 +23,11 @@ public class PieceDto {
     public PieceDto() {
     }
 
-    public PieceDto(long id, String name, String genre, long exhibitionId) {
+    public PieceDto(long id, String name, String genre, String imageUrl, long exhibitionId) {
         this.id = id;
         this.name = name;
         this.genre = genre;
+        this.imageUrl = imageUrl;
         this.exhibitionId = exhibitionId;
 
     }
@@ -53,6 +56,13 @@ public class PieceDto {
         this.genre = genre;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
     public long getExhibitionId() {
         return exhibitionId;
     }

@@ -3,12 +3,12 @@ package com.softserve.itacademy.controller;
 import com.softserve.itacademy.dto.PieceDto;
 import com.softserve.itacademy.dto.PieceTransformer;
 import com.softserve.itacademy.model.Genre;
-import com.softserve.itacademy.model.ImageData;
+//import com.softserve.itacademy.model.ImageData;
 import com.softserve.itacademy.model.Piece;
 
 import com.softserve.itacademy.service.PieceService;
 import com.softserve.itacademy.service.ExhibitionService;
-import com.softserve.itacademy.service.impl.ImageService;
+//import com.softserve.itacademy.service.impl.ImageService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,35 +26,34 @@ import java.io.IOException;
 public class PieceController {
     private final PieceService pieceService;
     private final ExhibitionService exhibitionService;
-    private final ImageService imageService;
+    //private final ImageService imageService;
 
 
-    public PieceController(PieceService pieceService, ExhibitionService exhibitionService, ImageService imageService) {
+    public PieceController(PieceService pieceService, ExhibitionService exhibitionService) {
         this.pieceService = pieceService;
         this.exhibitionService = exhibitionService;
-        this.imageService = imageService;
+        //this.imageService = imageService;
     }
 
     @GetMapping("/create/exhibitions/{exhibition_id}")
-    public String create(@PathVariable("exhibition_id") long exhibitionId,@PathVariable String fileName,  Model model) {
+    public String create(@PathVariable("exhibition_id") long exhibitionId,  Model model) {
         model.addAttribute("piece", new PieceDto());
         model.addAttribute("exhibition", exhibitionService.readById(exhibitionId));
         model.addAttribute("genres", Genre.values());
-       // byte[] imageData= imageService.downloadImage(fileName);
-        model.addAttribute("images", imageService.downloadImage(fileName));
-        /*ResponseEntity.status(HttpStatus.OK)
-                .contentType(MediaType.valueOf("image/png"))
-                .body(imageData);*/
+
+
         return "create-piece";
     }
 
     @PostMapping("/create/exhibitions/{exhibition_id}")
-    public String create(@PathVariable("exhibition_id") long exhibitionId, @RequestParam("image") MultipartFile file, Model model,
+    public String create(@PathVariable("exhibition_id") long exhibitionId, Model model,
                          @Validated @ModelAttribute("piece") PieceDto pieceDto, BindingResult result) throws IOException {
         if (result.hasErrors()) {
-            model.addAttribute("exhibition", exhibitionService.readById(exhibitionId));
-            model.addAttribute("genre", Genre.values());
-            model.addAttribute("images", imageService.uploadImage(file));
+
+
+            pieceDto.setExhibitionId(exhibitionId);
+            pieceDto.setGenre(pieceDto.getGenre());
+            pieceDto.setImageUrl(pieceDto.getImageUrl());
             return "create-piece";
         }
         Piece piece = PieceTransformer.convertToEntity(
@@ -67,12 +66,12 @@ public class PieceController {
     }
 
     @GetMapping("/{piece_id}/update/exhibitions/{exhibition_id}")
-    public String update(@PathVariable("piece_id") long pieceId, @PathVariable("exhibition_id") long exhibitionId,@PathVariable String fileName, Model model) {
+    public String update(@PathVariable("piece_id") long pieceId, @PathVariable("exhibition_id") long exhibitionId, Model model) {
         PieceDto pieceDto = PieceTransformer.convertToDto(pieceService.readById(pieceId));
         model.addAttribute("piece", pieceDto);
         model.addAttribute("genres", Genre.values());
        // byte[] imageData= imageService.downloadImage(fileName);
-        model.addAttribute("images", imageService.downloadImage(fileName));
+       // model.addAttribute("images", imageService.downloadImage(fileName));
        /* ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.valueOf("image/png"))
                 .body(imageData);*/
@@ -80,11 +79,12 @@ public class PieceController {
     }
 
     @PostMapping("/{piece_id}/update/exhibitions/{exhibition_id}")
-    public String update(@PathVariable("piece_id") long pieceId, @PathVariable("exhibition_id") long exhibitionId,@PathVariable String fileName, Model model,
+    public String update(@PathVariable("piece_id") long pieceId, @PathVariable("exhibition_id") long exhibitionId, Model model,
                          @Validated @ModelAttribute("piece")PieceDto pieceDto, BindingResult result) {
         if (result.hasErrors()) {
             model.addAttribute("genres", Genre.values());
-            model.addAttribute("images", imageService.downloadImage(fileName));
+            model.addAttribute("imageUrl", pieceDto.getImageUrl());
+           // model.addAttribute("images", imageService.downloadImage(fileName));
             return "update-piece";
         }
         Piece piece = PieceTransformer.convertToEntity(
@@ -97,7 +97,7 @@ public class PieceController {
     }
 
     @GetMapping("/{piece_id}/delete/exhibitions/{exhibition_id}")
-    public String delete(@PathVariable("piece_id") long pieceId, @PathVariable("exhibition_id") long exhibitionId, @PathVariable String fileName) {
+    public String delete(@PathVariable("piece_id") long pieceId, @PathVariable("exhibition_id") long exhibitionId) {
         pieceService.delete(pieceId);
         return "redirect:/exhibitions/" + exhibitionId + "/pieces";
     }
